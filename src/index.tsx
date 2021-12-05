@@ -9,6 +9,8 @@ function GitgraphSection({ setGitgraph, setMaster, orientation, author }) {
     <Gitgraph key={orientation + author} options={{ orientation, author }}>
       {(gitgraph) => {
         setGitgraph(gitgraph);
+        gitgraph._graph.template.commit.message.displayAuthor = false;
+        gitgraph._graph.template.commit.message.displayHash = false;
         const master = gitgraph.branch("master");
         master.commit("Initial Commit");
         setMaster(master);
@@ -82,14 +84,14 @@ function App() {
             }}
           />
         </Form.Item>
-        <Form.Item label="用户">
+        {/* <Form.Item label="用户">
           <Input
             value={author}
             onChange={(event) => {
               setAuthor(event.target.value);
             }}
           />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="指令" name="exec">
           <Input.TextArea
             onPressEnter={() => {
