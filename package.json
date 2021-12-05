@@ -2,7 +2,6 @@
   "name": "git-graph",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "parcel index.html --no-autoinstall",
     "build": "parcel build index.html --no-autoinstall"
