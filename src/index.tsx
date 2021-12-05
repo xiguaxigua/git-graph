@@ -22,6 +22,7 @@ function App() {
   const [master, setMaster] = useState(null);
   const [orientation, setOrientation] = useState("vertical");
   const [author, setAuthor] = useState("foo <foo@bar.com>");
+  const [list, setList] = useState([]);
 
   const formRef = useRef<any>();
   const global = useRef<any>({});
@@ -40,6 +41,9 @@ function App() {
         master,
         g: global.current,
       });
+      setList((list) => {
+        return list.concat([formRef.current.getFieldValue("exec")]);
+      });
       setTimeout(() => {
         formRef.current.setFieldsValue({
           exec: "",
@@ -56,6 +60,10 @@ function App() {
 
   return (
     <div className="app">
+      <div className="app-list">
+        <pre></pre>
+        <Input.TextArea value={list.join("\n")} autoSize={true} />
+      </div>
       <Form
         ref={formRef}
         className="app-form"
