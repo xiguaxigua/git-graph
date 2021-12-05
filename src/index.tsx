@@ -2,15 +2,29 @@ import React, { useRef, useState } from "react";
 import ReactDom from "react-dom";
 import { Form, Input, notification, Switch } from "antd";
 
-const { Gitgraph }: any = require("@gitgraph/react");
+const { Gitgraph, templateExtend }: any = require("@gitgraph/react");
+
+const baseTheme = window.location.search.includes("blackarrow")
+  ? "blackarrow"
+  : "metro";
+
+const template = templateExtend(baseTheme, {
+  commit: {
+    message: {
+      displayHash: false,
+      displayAuthor: false,
+    },
+  },
+});
 
 function GitgraphSection({ setGitgraph, setMaster, orientation, author }) {
   return (
-    <Gitgraph key={orientation + author} options={{ orientation, author }}>
+    <Gitgraph
+      key={orientation + author}
+      options={{ orientation, author, template }}
+    >
       {(gitgraph) => {
         setGitgraph(gitgraph);
-        gitgraph._graph.template.commit.message.displayAuthor = false;
-        gitgraph._graph.template.commit.message.displayHash = false;
         const master = gitgraph.branch("master");
         master.commit("Initial Commit");
         setMaster(master);
