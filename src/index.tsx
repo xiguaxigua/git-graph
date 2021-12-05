@@ -1,8 +1,6 @@
 import React, { useRef, useState } from "react";
 import ReactDom from "react-dom";
 import { Form, Input, notification, Switch } from "antd";
-import "antd/dist/antd.css";
-import "./index.css";
 
 const { Gitgraph }: any = require("@gitgraph/react");
 
